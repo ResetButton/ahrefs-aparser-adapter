@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+/*
 use App\Actions\Ahrefs\GetSubscriptionAction;
 use App\Enums\AhrefsFromEnum;
+*
+ *
+ */
 
+
+use App\Actions\AhrefsSubscriptionInfoAction;
+use App\Enums\AhrefsFromEnum;
+use App\Http\Responses\ApiResponse;
 use Illuminate\Http\Request;
 
 class AhrefsController extends Controller
@@ -12,16 +20,16 @@ class AhrefsController extends Controller
     public function __invoke(Request $request)
     {
         $from = $request->input('from');
-        $fromTable = AhrefsFromEnum::tryFrom($from);
+        $supportedEndpoint = AhrefsFromEnum::tryFrom($from);
 
-        if ($fromTable === null) {
-            return response()->json(["error" => "from: table '".$from."' not found or not implemented"], 404);
+        if ($supportedEndpoint === null) {
+            return ApiResponse::notFound("from: table '".$from."' not found or not implemented");
         }
 
-        $result = match ($fromTable) {
-            AhrefsFromEnum::SUBSCRIPTION_INFO => (new GetSubscriptionAction())->execute(),
+        $result = match ($supportedEndpoint) {
+            AhrefsFromEnum::SUBSCRIPTION_INFO => (new AhrefsSubscriptionInfoAction())->execute(),
         };
 
-        return response()->json($result);
+        return ApiResponse::ok($result);
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "021d16549bac0dfb0d3ec78cd460e97e",
+    "content-hash": "d763f17c8c94f6512f08408396897a00",
     "packages": [
         {
             "name": "brick/math",
@@ -3286,6 +3286,59 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.1"
             },
             "time": "2025-09-04T20:59:21+00:00"
+        },
+        {
+            "name": "reset-button/a-parser-api-php-client",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ResetButton/a-parser-api-php-client.git",
+                "reference": "62ca0805cb5b2d9b1590fde45de9fc3d7a945e2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ResetButton/a-parser-api-php-client/zipball/62ca0805cb5b2d9b1590fde45de9fc3d7a945e2c",
+                "reference": "62ca0805cb5b2d9b1590fde45de9fc3d7a945e2c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpcompatibility/php-compatibility": "^9.3",
+                "phpunit/phpunit": "^10.0",
+                "squizlabs/php_codesniffer": "^3.11"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ResetButton\\AparserPhpClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Shatrov",
+                    "email": "counterfate@gmail.com"
+                }
+            ],
+            "description": "PHP client for A-Parser API",
+            "homepage": "https://github.com/reset-button/a-parser-php-client",
+            "keywords": [
+                "a-parser",
+                "api",
+                "client",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/ResetButton/a-parser-api-php-client/issues",
+                "source": "https://github.com/ResetButton/a-parser-api-php-client/tree/1.0.0"
+            },
+            "time": "2024-12-18T06:52:03+00:00"
         },
         {
             "name": "symfony/clock",
@@ -7030,16 +7083,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.44",
+            "version": "11.5.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c346885c95423eda3f65d85a194aaa24873cda82"
+                "reference": "faf5fff4fb9beb290affa53f812b05380819c51a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c346885c95423eda3f65d85a194aaa24873cda82",
-                "reference": "c346885c95423eda3f65d85a194aaa24873cda82",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/faf5fff4fb9beb290affa53f812b05380819c51a",
+                "reference": "faf5fff4fb9beb290affa53f812b05380819c51a",
                 "shasum": ""
             },
             "require": {
@@ -7111,7 +7164,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.44"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.45"
             },
             "funding": [
                 {
@@ -7135,7 +7188,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-13T07:17:35+00:00"
+            "time": "2025-12-01T07:38:43+00:00"
         },
         {
             "name": "sebastian/cli-parser",

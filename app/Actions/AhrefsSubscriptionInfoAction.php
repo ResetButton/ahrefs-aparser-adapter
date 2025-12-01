@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Ahrefs;
+namespace App\Actions;
 
-class GetSubscriptionAction
+class AhrefsSubscriptionInfoAction
 {
     public function execute()
     {
