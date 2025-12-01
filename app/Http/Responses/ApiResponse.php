@@ -41,4 +41,10 @@ class ApiResponse implements Responsable
     {
         return new static(404, errorMessage: $errorMessage);
     }
+
+    public static function errorUnprocessableEntity(string $errorMessage): static
+    {
+        return new static(422, errorMessage: $errorMessage);
+    }
+
 }

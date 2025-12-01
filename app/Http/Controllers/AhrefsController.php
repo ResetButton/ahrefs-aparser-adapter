@@ -10,24 +10,23 @@ use App\Enums\AhrefsFromEnum;
  */
 
 
+use App\Actions\AhrefsDomainRatingAction;
 use App\Actions\AhrefsSubscriptionInfoAction;
 use App\Enums\AhrefsFromEnum;
+use App\Http\Requests\AhrefsRequest;
 use App\Http\Responses\ApiResponse;
-use Illuminate\Http\Request;
+use ResetButton\AparserPhpClient\Aparser;
 
 class AhrefsController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(AhrefsRequest $request, Aparser $aparser)
     {
-        $from = $request->input('from');
-        $supportedEndpoint = AhrefsFromEnum::tryFrom($from);
-
-        if ($supportedEndpoint === null) {
-            return ApiResponse::notFound("from: table '".$from."' not found or not implemented");
-        }
+        $endpoint = $request->input('from');
+        $supportedEndpoint = AhrefsFromEnum::tryFrom($endpoint);
 
         $result = match ($supportedEndpoint) {
             AhrefsFromEnum::SUBSCRIPTION_INFO => (new AhrefsSubscriptionInfoAction())->execute(),
+            AhrefsFromEnum::DOMAIN_RATING => (new AhrefsDomainRatingAction($aparser))->execute(),
         };
 
         return ApiResponse::ok($result);
