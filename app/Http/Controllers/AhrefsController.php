@@ -19,11 +19,11 @@ class AhrefsController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $from = $request->input('from');
-        $supportedEndpoint = AhrefsFromEnum::tryFrom($from);
+        $endpoint = $request->input('from');
+        $supportedEndpoint = AhrefsFromEnum::tryFrom($endpoint);
 
         if ($supportedEndpoint === null) {
-            return ApiResponse::notFound("from: table '".$from."' not found or not implemented");
+            return ApiResponse::notFound("from: table '".$endpoint."' not found or not implemented");
         }
 
         $result = match ($supportedEndpoint) {
