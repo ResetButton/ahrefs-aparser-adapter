@@ -2,17 +2,21 @@
 
 namespace App\Actions;
 
-use ResetButton\AparserPhpClient\Aparser;
+use App\Data\Ahrefs\AhrefsDomainRatingInputData;
+use App\Data\Ahrefs\AhrefsDomainRatingOutputData;
+use App\Data\Aparser\AparserAhrefsBacklinkCheckerInputData;
+use App\Services\AparserService;
 
 class AhrefsDomainRatingAction
 {
-    const TASK_PRESET = 'ahrefs_domain_rating';
-
-    public function __construct(readonly Aparser $aparser)
+    public function __construct(readonly AparserService $aparserService)
     {}
 
-    public function execute(string $domain) : string
+    public function execute(AhrefsDomainRatingInputData $data): AhrefsDomainRatingOutputData
     {
-        return $domain;
+        $serviceData = AparserAhrefsBacklinkCheckerInputData::fromAhrefsDomainRatingInputData($data);
+        $result = $this->aparserService->parseAhrefsBacklinkChecker($serviceData);
+
+        return new AhrefsDomainRatingOutputData($result->domainRating);
     }
 }

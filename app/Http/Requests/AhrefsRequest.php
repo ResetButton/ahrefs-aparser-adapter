@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\AhrefsDomainRatingMode;
 use App\Enums\AhrefsFromEnum;
 use App\Http\Responses\ApiResponse;
 use Illuminate\Contracts\Validation\Validator;
@@ -18,8 +19,16 @@ class AhrefsRequest extends FormRequest
 
     public function rules(): array
     {
+        //attach validation rules
+        $extraValidationRules = match ($this->input('from')) {
+            'domain_rating' => $this->getDomainRatingValidationRules(),
+             default => []
+        };
+
+
         return [
             'from' => ['required', Rule::enum(AhrefsFromEnum::class)],
+            ...$extraValidationRules
         ];
     }
 
@@ -29,6 +38,17 @@ class AhrefsRequest extends FormRequest
             'from' => "from: table :from not found or not implemented111"
         ];
     }
+
+    private function getDomainRatingValidationRules()
+    {
+        return [
+            'target' => ['required'],
+            'mode' => [Rule::enum(AhrefsDomainRatingMode::class)],
+            'limit' => ['integer', 'min:1'],
+        ];
+    }
+
+
 
     /*
     protected function failedValidation(Validator $validator)

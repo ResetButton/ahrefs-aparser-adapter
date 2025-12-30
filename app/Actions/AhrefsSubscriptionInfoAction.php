@@ -2,16 +2,12 @@
 
 namespace App\Actions;
 
+use App\Data\Ahrefs\AhrefsSubscriptionInfoOutputData;
+
 class AhrefsSubscriptionInfoAction
 {
     public function execute()
     {
-        return [
-            "info" => [
-                "rows_left" => 500000,
-                "rows_limit" => 500000,
-                "subscription" => "Enterprise Subscription"
-            ]
-        ];
+        return new AhrefsSubscriptionInfoOutputData();
     }
 }
