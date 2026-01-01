@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use App\Data\Ahrefs\AhrefsSubscriptionInfoOutputData;
 
-class AhrefsSubscriptionInfoAction
+class AhrefsSubscriptionInfoAction extends AhrefsAction
 {
     public function execute()
     {

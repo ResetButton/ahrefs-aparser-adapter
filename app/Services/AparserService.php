@@ -13,7 +13,7 @@ use ResetButton\AparserPhpClient\Parser;
 
 readonly class AparserService
 {
-    
+
     public function __construct(public Aparser $aparser)
     {}
 
@@ -24,7 +24,6 @@ readonly class AparserService
             ->setRawResults();
 
         $result = $this->runOneRequestAction($action, $data);
-
         return AparserAhrefsBacklinkCheckerOutputData::fromAparserResult($result);
     }
 

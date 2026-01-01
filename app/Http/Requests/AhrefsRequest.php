@@ -19,12 +19,10 @@ class AhrefsRequest extends FormRequest
 
     public function rules(): array
     {
-        //attach validation rules
         $extraValidationRules = match ($this->input('from')) {
-            'domain_rating' => $this->getDomainRatingValidationRules(),
-             default => []
+            'subscription_info' => [],
+             default => $this->getCommonValidationRules(),
         };
-
 
         return [
             'from' => ['required', Rule::enum(AhrefsFromEnum::class)],
@@ -35,15 +33,15 @@ class AhrefsRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'from' => "from: table :from not found or not implemented111"
+            'from' => "from: table :from not found or not implemented"
         ];
     }
 
-    private function getDomainRatingValidationRules()
+    private function getCommonValidationRules(): array
     {
         return [
             'target' => ['required'],
-            'mode' => [Rule::enum(AhrefsDomainRatingMode::class)],
+            'mode' => ['required', Rule::enum(AhrefsDomainRatingMode::class)],
             'limit' => ['integer', 'min:1'],
         ];
     }
