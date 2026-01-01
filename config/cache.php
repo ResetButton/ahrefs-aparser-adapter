@@ -4,6 +4,7 @@ use Illuminate\Support\Str;
 
 return [
 
+    'cache_time_seconds' => env('CACHE_TIME_HOURS', 24) * 60 * 60,
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store

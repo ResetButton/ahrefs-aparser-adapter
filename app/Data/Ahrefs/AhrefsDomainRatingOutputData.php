@@ -5,13 +5,13 @@ namespace App\Data\Ahrefs;
 use App\Enums\AhrefsDomainRatingMode;
 use App\Http\Requests\AhrefsRequest;
 
-class AhrefsDomainRatingOutputData
+readonly class AhrefsDomainRatingOutputData implements AhrefsOutputData
 {
     public function __construct(
-        readonly float $domainRating = 0
+        public float $domainRating = 0
     ){}
 
-    public function toArray(): array
+    public function toAhrefsApiResponse(): array
     {
         return [
             "domain" => [

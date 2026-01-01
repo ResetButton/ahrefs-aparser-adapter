@@ -5,13 +5,17 @@ namespace App\Data\Aparser;
 use App\Data\Ahrefs\AhrefsDomainRatingInputData;
 use App\Enums\AhrefsDomainRatingMode;
 
-class AparserAhrefsBacklinkCheckerInputData
+readonly class AparserAhrefsBacklinkCheckerInputData implements AparserAhrefsInputData
 {
     public function __construct(
-        readonly string $target,
-        readonly AhrefsDomainRatingMode $mode,
-        int $limit = 1000
+        public string                 $target,
+        public AhrefsDomainRatingMode $mode,
     ){}
+
+    public function cacheName(): string
+    {
+        return  $this->mode->value.' '.base64_encode($this->target);
+    }
 
     public static function fromAhrefsDomainRatingInputData(AhrefsDomainRatingInputData $data): static
     {

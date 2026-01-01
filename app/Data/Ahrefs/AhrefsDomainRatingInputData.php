@@ -5,11 +5,11 @@ namespace App\Data\Ahrefs;
 use App\Enums\AhrefsDomainRatingMode;
 use App\Http\Requests\AhrefsRequest;
 
-class AhrefsDomainRatingInputData
+readonly class AhrefsDomainRatingInputData implements AhrefsInputData
 {
     public function __construct(
-        readonly string $target,
-        readonly AhrefsDomainRatingMode $mode,
+        public string                 $target,
+        public AhrefsDomainRatingMode $mode,
     ){}
 
     public static function fromRequest(AhrefsRequest $request): static

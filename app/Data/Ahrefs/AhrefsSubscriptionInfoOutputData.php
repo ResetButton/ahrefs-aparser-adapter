@@ -2,9 +2,9 @@
 
 namespace App\Data\Ahrefs;
 
-class AhrefsSubscriptionInfoOutputData
+readonly class AhrefsSubscriptionInfoOutputData implements AhrefsOutputData
 {
-    public function toArray(): array
+    public function toAhrefsApiResponse(): array
     {
         return [
             "info" => [

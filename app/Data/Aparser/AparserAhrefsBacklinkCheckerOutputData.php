@@ -2,16 +2,16 @@
 
 namespace App\Data\Aparser;
 
-class AparserAhrefsBacklinkCheckerOutputData
+readonly class AparserAhrefsBacklinkCheckerOutputData implements AparserAhrefsOutputData
 {
     public function __construct(
-        readonly float $domainRating = 0
+        public float $domainRating = 0
     ){}
 
-    public static function fromArray(array $data): static
+    public static function fromAparserResult(array $data): static
     {
         return new static(
-            domainRating: data_get($data, 'domain_rating')
+            domainRating: data_get($data, 'rating')
         );
     }
 }
