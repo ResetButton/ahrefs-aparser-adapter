@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Data\Ahrefs\AhrefsAnchorsInputData;
+use App\Data\Ahrefs\AhrefsRefdomainsInputData;
 use App\Data\Ahrefs\AhrefsDomainRatingInputData;
 use App\Data\Ahrefs\AhrefsDomainRatingOutputData;
 use App\Data\Aparser\AparserAhrefsBacklinkCheckerInputData;
@@ -16,6 +16,6 @@ class AhrefsDomainRatingAction extends AhrefsAction
         $serviceData = AparserAhrefsBacklinkCheckerInputData::fromAhrefsDomainRatingInputData($data);
         $result = $this->aparserService->parseAhrefsBacklinkChecker($serviceData);
 
-        return new AhrefsDomainRatingOutputData($result->domainRating);
+        return AhrefsDomainRatingOutputData::fromAparserAhrefsBacklinkCheckerOutputData($result);
     }
 }

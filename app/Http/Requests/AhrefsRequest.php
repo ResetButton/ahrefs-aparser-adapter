@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\AhrefsDomainRatingMode;
+use App\Enums\AhrefsMode;
 use App\Enums\AhrefsFromEnum;
 use App\Http\Responses\ApiResponse;
 use Illuminate\Contracts\Validation\Validator;
@@ -41,7 +41,7 @@ class AhrefsRequest extends FormRequest
     {
         return [
             'target' => ['required'],
-            'mode' => ['required', Rule::enum(AhrefsDomainRatingMode::class)],
+            'mode' => ['required', Rule::enum(AhrefsMode::class)],
             'limit' => ['integer', 'min:1'],
         ];
     }
@@ -49,6 +49,7 @@ class AhrefsRequest extends FormRequest
 
 
     /*
+     * todo
     protected function failedValidation(Validator $validator)
     {
         return response()->json(['errors' => $validator->errors()], 422);

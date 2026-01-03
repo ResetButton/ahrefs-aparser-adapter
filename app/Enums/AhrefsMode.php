@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum AhrefsDomainRatingMode: string
+enum AhrefsMode: string
 {
     case SUBDOMAINS = 'subdomains';
     case EXACT = 'exact';

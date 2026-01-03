@@ -2,7 +2,7 @@
 
 namespace App\Data\Ahrefs;
 
-use App\Enums\AhrefsDomainRatingMode;
+use App\Enums\AhrefsMode;
 use App\Http\Requests\AhrefsRequest;
 
 readonly class AhrefsDomainRatingInputData implements AhrefsInputData
