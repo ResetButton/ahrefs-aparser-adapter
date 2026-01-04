@@ -13,7 +13,7 @@ use App\Enums\AhrefsFromEnum;
 use App\Actions\AhrefsRefdomainsAction;
 use App\Actions\AhrefsDomainRatingAction;
 use App\Actions\AhrefsSubscriptionInfoAction;
-use App\Data\Ahrefs\AhrefsRefdomainsInputData;
+use App\Data\Ahrefs\AhrefsCommonInputData;
 use App\Data\Ahrefs\AhrefsDomainRatingInputData;
 use App\Data\Ahrefs\AhrefsOutputData;
 use App\Enums\AhrefsFromEnum;
@@ -32,7 +32,7 @@ class AhrefsController extends Controller
         $result = match ($supportedEndpoint) {
             AhrefsFromEnum::SUBSCRIPTION_INFO => (new AhrefsSubscriptionInfoAction($aparserService))->execute(),
             AhrefsFromEnum::DOMAIN_RATING => (new AhrefsDomainRatingAction($aparserService))->execute(AhrefsDomainRatingInputData::fromRequest($request)),
-            AhrefsFromEnum::REFDOMAINS => (new AhrefsRefdomainsAction($aparserService))->execute(AhrefsRefdomainsInputData::fromRequest($request)),
+            AhrefsFromEnum::REFDOMAINS => (new AhrefsRefdomainsAction($aparserService))->execute(AhrefsCommonInputData::fromRequest($request)),
         };
 
         return ApiResponse::ok($result->toAhrefsApiResponse());

@@ -2,7 +2,7 @@
 
 namespace App\Data\Aparser;
 
-use App\Data\Ahrefs\AhrefsRefdomainsInputData;
+use App\Data\Ahrefs\AhrefsCommonInputData;
 use App\Data\Ahrefs\AhrefsDomainRatingInputData;
 use App\Enums\AhrefsMode;
 
@@ -10,7 +10,7 @@ readonly class AparserAhrefsBacklinkCheckerInputData implements AparserAhrefsInp
 {
     public function __construct(
         public string     $target,
-        public AhrefsMode $mode,
+        public AhrefsMode $mode = AhrefsMode::SUBDOMAINS,
         public int $limit = 1000,
     ){}
 
@@ -23,11 +23,10 @@ readonly class AparserAhrefsBacklinkCheckerInputData implements AparserAhrefsInp
     {
         return new static(
             target: $data->target,
-            mode: AhrefsMode::SUBDOMAINS
         );
     }
 
-    public static function fromAhrefsRefdomainsInputData(AhrefsRefdomainsInputData $data): static
+    public static function fromAhrefsCommonInputData(AhrefsCommonInputData $data): static
     {
         return new static(
             target: $data->target,
@@ -35,6 +34,4 @@ readonly class AparserAhrefsBacklinkCheckerInputData implements AparserAhrefsInp
             limit: $data->limit
         );
     }
-
-
 }

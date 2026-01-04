@@ -2,6 +2,8 @@
 
 namespace App\Data\Aparser;
 
+use App\Support\AparserAhrefsBacklinkCheckerBacklinks\AparserAhrefsBacklinkCheckerBacklinksCollection;
+use App\Support\AparserAhrefsBacklinkCheckerBacklinks\AparserAhrefsBacklinkCheckerBacklinksData;
 use InvalidArgumentException;
 
 readonly class AparserAhrefsBacklinkCheckerOutputData implements AparserAhrefsOutputData
@@ -15,21 +17,15 @@ readonly class AparserAhrefsBacklinkCheckerOutputData implements AparserAhrefsOu
         public int   $refDomainsDoFollowPersentage = 0,
         public int   $backlinks = 0,
         public int   $backlinksDoFollowPersentage = 0,
-        public array $topBacklinks = []
-    ){
-        foreach ($topBacklinks as $topBacklink) {
-            if (!$topBacklink instanceof AparserAhrefsBacklinkCheckerBacklinksData) {
-                throw new InvalidArgumentException();
-            }
-        }
-    }
+        public AparserAhrefsBacklinkCheckerBacklinksCollection $topBacklinks
+    ){}
 
     public static function fromAparserResult(array $data): static
     {
-        $topBacklinks = [];
+        $topBacklinks = new AparserAhrefsBacklinkCheckerBacklinksCollection();
         $dataTopBacklinks = data_get($data, 'topbacklinks', []);
         foreach ($dataTopBacklinks as $dataTopBacklink) {
-            $topBacklinks[] = AparserAhrefsBacklinkCheckerBacklinksData::fromArray($dataTopBacklink);
+            $topBacklinks->push(AparserAhrefsBacklinkCheckerBacklinksData::fromArray($dataTopBacklink));
         }
 
         return new static(

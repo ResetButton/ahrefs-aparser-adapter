@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Data\Ahrefs\AhrefsRefdomainsInputData;
+use App\Data\Ahrefs\AhrefsCommonInputData;
 use App\Data\Ahrefs\AhrefsDomainRatingInputData;
 use App\Data\Ahrefs\AhrefsDomainRatingOutputData;
 use App\Data\Aparser\AparserAhrefsBacklinkCheckerInputData;

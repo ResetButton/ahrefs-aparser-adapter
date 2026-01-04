@@ -5,7 +5,7 @@ namespace App\Data\Ahrefs;
 use App\Enums\AhrefsMode;
 use App\Http\Requests\AhrefsRequest;
 
-readonly class AhrefsRefdomainsInputData implements AhrefsInputData
+readonly class AhrefsCommonInputData implements AhrefsInputData
 {
     public function __construct(
         public string     $target,

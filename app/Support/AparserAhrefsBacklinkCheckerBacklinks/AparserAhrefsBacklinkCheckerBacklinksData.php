@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Data\Aparser;
-
-use ResetButton\AparserPhpClient\Actions\OneRequestAction;
+namespace App\Support\AparserAhrefsBacklinkCheckerBacklinks;
 
 class AparserAhrefsBacklinkCheckerBacklinksData
 {
     public function __construct(
-        readonly string $page = "",
-        readonly string $anchor = "",
-        readonly string $preAnchor = "",
-        readonly string $postAnchor = "",
-        readonly string $title = "",
-        readonly int $domainRating = 0,
-        readonly string $target = "",
+        readonly string $page,
+        readonly string $anchor,
+        readonly string $preAnchor,
+        readonly string $postAnchor,
+        readonly string $title,
+        readonly int $domainRating,
+        readonly string $target,
         //redirects
         //redirect_code
     ) {}

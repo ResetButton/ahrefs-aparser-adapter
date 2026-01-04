@@ -21,6 +21,7 @@ class AhrefsRequest extends FormRequest
     {
         $extraValidationRules = match ($this->input('from')) {
             'subscription_info' => [],
+            'domain_rating' => $this->getDomainRatingValidationRules(),
              default => $this->getCommonValidationRules(),
         };
 
@@ -34,6 +35,13 @@ class AhrefsRequest extends FormRequest
     {
         return [
             'from' => "from: table :from not found or not implemented"
+        ];
+    }
+
+    private function getDomainRatingValidationRules(): array
+    {
+        return [
+            'target' => ['required'],
         ];
     }
 
