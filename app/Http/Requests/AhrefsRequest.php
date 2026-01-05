@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Enums\AhrefsMode;
 use App\Enums\AhrefsFromEnum;
+use App\Exceptions\ApiRequestValidationException;
 use App\Http\Responses\ApiResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,7 +35,7 @@ class AhrefsRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'from' => "from: table :from not found or not implemented"
+            'from' => "from: table :input not found or not implemented"
         ];
     }
 
@@ -54,15 +55,11 @@ class AhrefsRequest extends FormRequest
         ];
     }
 
-
-
-    /*
-     * todo
     protected function failedValidation(Validator $validator)
     {
+        throw new ApiRequestValidationException($validator);
+        dd($validator);
         return response()->json(['errors' => $validator->errors()], 422);
         //return ApiResponse::errorUnprocessableEntity(implode(', ', $validator->errors()->all()));
     }
-    */
-
 }
