@@ -20,7 +20,6 @@ class ApiResponse implements Responsable
     public function toResponse($request)
     {
         $payload = match (true) {
-            $this->httpCode >= 500 => ['error_message' => 'Server error'],
             $this->httpCode >= 400 => ['error' => $this->errorMessage],
             $this->httpCode >= 200 => $this->data,
         };
@@ -47,4 +46,8 @@ class ApiResponse implements Responsable
         return new static(422, errorMessage: $errorMessage);
     }
 
+    public static function fromException(\Throwable $e): static
+    {
+        return new static(500, errorMessage: $e->getMessage());
+    }
 }

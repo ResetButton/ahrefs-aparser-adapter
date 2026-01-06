@@ -11,15 +11,15 @@ readonly class AhrefsRefdomainsOutputData implements AhrefsOutputData
 {
     public function __construct(
         public AparserAhrefsBacklinkCheckerBacklinksCollection $topBacklinks,
-        public float $refDomains = 0,
+        public int $refDomains,
     ){}
 
     public function toAhrefsApiResponse(): array
     {
-        $refDomains = [];
+        $refDomainsData = [];
         /* @var AparserAhrefsBacklinkCheckerBacklinksData $topBacklink */
         foreach ($this->topBacklinks as $topBacklink) {
-            $refDomains[] = [
+            $refDomainsData[] = [
                 'refdomain' => parse_url($topBacklink->page, PHP_URL_HOST),
                 'backlinks' => 0,
                 'refpages' => 0,
@@ -30,7 +30,7 @@ readonly class AhrefsRefdomainsOutputData implements AhrefsOutputData
         }
 
         return [
-            "refdomains" => $refDomains,
+            "refdomains" => $refDomainsData,
             "stats" => [
                 "refdomains" => $this->refDomains,
                 "ips" => 0,

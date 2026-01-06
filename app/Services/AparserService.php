@@ -9,6 +9,7 @@ use App\Data\Aparser\AparserAhrefsInputData;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use ResetButton\AparserPhpClient\Actions\OneRequestAction;
+use ResetButton\AparserPhpClient\Actions\PingAction;
 use ResetButton\AparserPhpClient\Aparser;
 use ResetButton\AparserPhpClient\Parser;
 
@@ -17,6 +18,11 @@ readonly class AparserService
 
     public function __construct(public Aparser $aparser)
     {}
+
+    public function healthCheck(): void
+    {
+        $result = $this->aparser->runAction(new PingAction());
+    }
 
     public function parseAhrefsBacklinkChecker(AparserAhrefsBacklinkCheckerInputData $data): AparserAhrefsBacklinkCheckerOutputData
     {
@@ -32,7 +38,8 @@ readonly class AparserService
             %]$result.json';
 
         $parser = (new Parser('Rank::Ahrefs', 'ahrefs_api_emulate'))
-            ->addOverride('formatresult', preg_replace('/\r|\n|\r\n/', '', $resultFormat));
+            ->addOverride('formatresult', preg_replace('/\r|\n|\r\n/', '', $resultFormat))
+            ->addOverride('mode', $data->mode->value);
         $action = new OneRequestAction($parser, $data->target);
 
         $result = $this->runOneRequestAction($action, $data);
